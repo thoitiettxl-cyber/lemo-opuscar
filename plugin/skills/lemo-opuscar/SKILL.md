@@ -32,7 +32,7 @@ middle, and they meet only at assembly. The workspace clone's
 `colormatch.sh` — all POSIX sh, ffmpeg, target 1920x1080, 24 fps,
 H.264 yuv420p, AAC 48 kHz stereo; see HYBRID.md for the exact commands
 and the demo/stress-test evidence). `hybrid/` is a local extension in
-the workspace clone (hybrid branch, PR #1), not part of the upstream
+the workspace clone (on main since merged PR #1), not part of the upstream
 plugin edition: if `$LIB/hybrid/` does not exist in the library you
 resolved, say so and do not invent its scripts — use the workspace
 clone at `~/workspace/lemo-opuscar` instead. Code cards are rendered
