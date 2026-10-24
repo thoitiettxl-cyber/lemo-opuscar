@@ -6,13 +6,19 @@
 #                                  voice = TTS and speech check (+ the English voice model); music = pluck.py (numba)
 #   sh setup.sh demo <slug>        add one style's demo source and poster to the library (reference only)
 # The library is a sparse clone of the main branch: guides, core/ tools and every STYLE.md. Big assets: tools/fetch.sh.
-# LEMO_OPUSCAR_HOME = where the library lives (default: the clone you stand in, else ~/lemo-opuscar).
+# LEMO_OPUSCAR_HOME = where the library lives (default: ~/workspace/lemo-opuscar
+# if it is a library, else the clone you stand in, else ~/lemo-opuscar).
+# The workspace clone is preferred on purpose: it is the user's fork, with
+# their films and the hybrid/ extension, and it is NOT lemo.managed, so
+# setup.sh uses it as-is and never resets it to upstream (see below).
 set -e
 REPO=${LEMO_OPUSCAR_REPO:-https://github.com/lemomo-ai/lemo-opuscar.git}
 
-# 1. Which library: $LEMO_OPUSCAR_HOME, else the clone we are standing in, else ~/lemo-opuscar
+# 1. Which library: $LEMO_OPUSCAR_HOME, else ~/workspace/lemo-opuscar,
+# else the clone we are standing in, else ~/lemo-opuscar
 is_lib() { [ -f "$1/AGENTS.md" ] && [ -d "$1/core/render" ]; }
 if [ -n "$LEMO_OPUSCAR_HOME" ]; then LIB=$LEMO_OPUSCAR_HOME
+elif is_lib "$HOME/workspace/lemo-opuscar"; then LIB=$HOME/workspace/lemo-opuscar
 elif top=$(git rev-parse --show-toplevel 2>/dev/null) && is_lib "$top"; then LIB=$top
 else LIB=$HOME/lemo-opuscar
 fi
